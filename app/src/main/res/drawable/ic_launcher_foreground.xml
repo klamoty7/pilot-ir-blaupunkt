@@ -44,14 +44,14 @@
         android:strokeLineCap="round"
         android:strokeAlpha="0.3" />
 
-    <!-- Buttons grid on remote -->
-    <rect android:x="40" android:y="50" android:width="8" android:height="6" android:rx="2" android:fillColor="#FFFFFF" android:fillAlpha="0.5" />
-    <rect android:x="50" android:y="50" android:width="8" android:height="6" android:rx="2" android:fillColor="#FFFFFF" android:fillAlpha="0.5" />
-    <rect android:x="60" android:y="50" android:width="8" android:height="6" android:rx="2" android:fillColor="#FFFFFF" android:fillAlpha="0.5" />
-    <rect android:x="40" android:y="60" android:width="8" android:height="6" android:rx="2" android:fillColor="#FFFFFF" android:fillAlpha="0.5" />
-    <rect android:x="50" android:y="60" android:width="8" android:height="6" android:rx="2" android:fillColor="#FFFFFF" android:fillAlpha="0.5" />
-    <rect android:x="60" android:y="60" android:width="8" android:height="6" android:rx="2" android:fillColor="#FFFFFF" android:fillAlpha="0.5" />
-    <rect android:x="40" android:y="70" android:width="8" android:height="6" android:rx="2" android:fillColor="#FFFFFF" android:fillAlpha="0.5" />
-    <rect android:x="50" android:y="70" android:width="8" android:height="6" android:rx="2" android:fillColor="#FFFFFF" android:fillAlpha="0.5" />
-    <rect android:x="60" android:y="70" android:width="8" android:height="6" android:rx="2" android:fillColor="#FFFFFF" android:fillAlpha="0.5" />
+    <!-- Buttons grid on remote (using path to avoid AAPT rect issues) -->
+    <path android:fillColor="#80FFFFFF" android:pathData="M40,50 L48,50 L48,56 L40,56 Z" />
+    <path android:fillColor="#80FFFFFF" android:pathData="M50,50 L58,50 L58,56 L50,56 Z" />
+    <path android:fillColor="#80FFFFFF" android:pathData="M60,50 L68,50 L68,56 L60,56 Z" />
+    <path android:fillColor="#80FFFFFF" android:pathData="M40,60 L48,60 L48,66 L40,66 Z" />
+    <path android:fillColor="#80FFFFFF" android:pathData="M50,60 L58,60 L58,66 L50,66 Z" />
+    <path android:fillColor="#80FFFFFF" android:pathData="M60,60 L68,60 L68,66 L60,66 Z" />
+    <path android:fillColor="#80FFFFFF" android:pathData="M40,70 L48,70 L48,76 L40,76 Z" />
+    <path android:fillColor="#80FFFFFF" android:pathData="M50,70 L58,70 L58,76 L50,76 Z" />
+    <path android:fillColor="#80FFFFFF" android:pathData="M60,70 L68,70 L68,76 L60,76 Z" />
 </vector>
