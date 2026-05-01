@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Uniwersalny Pilot IR</string>
+
+    <!-- Device selection -->
+    <string name="select_device">Wybierz urządzenie</string>
+    <string name="search_device">Szukaj urządzenia...</string>
+    <string name="change">Zmień</string>
+    <string name="no_devices_found">Nie znaleziono urządzeń</string>
+    <string name="codes">kodów</string>
+    <string name="device_selected">Wybrano: %1$s %2$s</string>
+
+    <!-- IR status -->
+    <string name="ir_ready">IR Gotowy</string>
+    <string name="ir_not_supported">Brak nadajnika IR</string>
+    <string name="ir_warning_message">⚠ Twój telefon nie posiada nadajnika IR lub brak uprawnień. Aplikacja działa w trybie demonstracyjnym — kody IR są wyświetlane, ale nie są wysyłane. Telefony z IR: Xiaomi, Huawei, Honor.</string>
+
+    <!-- Buttons -->
+    <string name="btn_power">POWER</string>
+    <string name="btn_source">SOURCE</string>
+    <string name="btn_vol_up">VOL +</string>
+    <string name="btn_vol_down">VOL -</string>
+    <string name="btn_mute">MUTE</string>
+    <string name="btn_ch_up">CH +</string>
+    <string name="btn_ch_down">CH -</string>
+    <string name="btn_menu">MENU</string>
+    <string name="btn_back">BACK</string>
+    <string name="btn_exit">EXIT</string>
+    <string name="btn_ok">OK</string>
+
+    <!-- Code display -->
+    <string name="last_sent_code">Ostatnio wysłany kod IR</string>
+    <string name="no_code_for_button">Brak kodu dla przycisku: %1$s</string>
+    <string name="no_code_in_database">Brak kodu w bazie dla tego urządzenia</string>
+    <string name="demo_mode_toast">Demo: %1$s (brak nadajnika IR)</string>
+</resources>

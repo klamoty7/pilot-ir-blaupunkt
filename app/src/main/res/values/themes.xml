@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.UniversalIRRemote" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/accent_blue</item>
+        <item name="colorPrimaryVariant">@color/accent_blue_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/accent_blue</item>
+        <item name="colorSecondaryVariant">@color/accent_blue_dark</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/bg_dark</item>
+        <item name="android:navigationBarColor">@color/bg_dark</item>
+        <item name="android:windowBackground">@color/bg_dark</item>
+    </style>
+
+    <!-- Remote button style -->
+    <style name="RemoteButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="backgroundTint">@color/card_bg_2</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="rippleColor">@color/accent_blue</item>
+    </style>
+
+    <!-- Number pad button style -->
+    <style name="NumButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="backgroundTint">@color/card_bg_2</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="rippleColor">@color/accent_blue</item>
+    </style>
+
+</resources>

@@ -1,44 +1,380 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#121212">
+    android:background="@color/bg_dark"
+    android:fillViewport="true">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Blaupunkt BN40F1132EEB"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_marginBottom="24dp"/>
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <Button android:id="@+id/btnPower" android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="POWER" android:backgroundTint="#E53935" android:textColor="#FFF" android:layout_marginBottom="16dp"/>
+        <!-- ── Header ── -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
 
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
-        <Button android:id="@+id/btnVolUp" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1"
-            android:text="VOL +" android:layout_marginEnd="8dp"/>
-        <Button android:id="@+id/btnChUp" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1"
-            android:text="CH +" android:layout_marginStart="8dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <!-- IR LED indicator -->
+                <View
+                    android:id="@+id/led_indicator"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/led_inactive"
+                    android:layout_marginEnd="12dp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_device_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Blaupunkt BN40F1132EEB"
+                        android:textColor="@color/text_primary"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_device_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TV"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_ir_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="IR Ready"
+                    android:textColor="@color/accent_blue"
+                    android:textSize="11sp"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btn_select_device"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="@string/change"
+                    android:textSize="12sp"
+                    android:backgroundTint="@color/accent_blue"
+                    android:paddingHorizontal="12dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── IR Warning (shown when no IR emitter) ── -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/tv_ir_warning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#2D1A00"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="2dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:text="@string/ir_warning_message"
+                android:textColor="#FFA500"
+                android:textSize="12sp" />
+        </androidx.cardview.widget.CardView>
+
+        <!-- ── Remote Control Body ── -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/card_bg"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Power + Source row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="12dp">
+
+                    <Button
+                        android:id="@+id/btn_power"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:text="⏻  POWER"
+                        android:textColor="@android:color/white"
+                        android:backgroundTint="@color/power_red"
+                        style="@style/RemoteButton" />
+
+                    <Button
+                        android:id="@+id/btn_source"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_weight="1"
+                        android:text="⇄  SOURCE"
+                        android:textColor="@android:color/white"
+                        android:backgroundTint="@color/accent_blue"
+                        style="@style/RemoteButton" />
+                </LinearLayout>
+
+                <!-- Volume + Mute + Channel row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="8dp">
+
+                    <Button
+                        android:id="@+id/btn_vol_up"
+                        android:layout_width="0dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:text="🔊 VOL+"
+                        style="@style/RemoteButton" />
+
+                    <Button
+                        android:id="@+id/btn_mute"
+                        android:layout_width="0dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:text="🔇 MUTE"
+                        style="@style/RemoteButton" />
+
+                    <Button
+                        android:id="@+id/btn_ch_up"
+                        android:layout_width="0dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        android:text="CH +"
+                        style="@style/RemoteButton" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <Button
+                        android:id="@+id/btn_vol_down"
+                        android:layout_width="0dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:text="🔉 VOL-"
+                        style="@style/RemoteButton" />
+
+                    <Button
+                        android:id="@+id/btn_menu"
+                        android:layout_width="0dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="6dp"
+                        android:text="☰ MENU"
+                        style="@style/RemoteButton" />
+
+                    <Button
+                        android:id="@+id/btn_ch_down"
+                        android:layout_width="0dp"
+                        android:layout_height="52dp"
+                        android:layout_weight="1"
+                        android:text="CH -"
+                        style="@style/RemoteButton" />
+                </LinearLayout>
+
+                <!-- D-Pad navigation -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- UP -->
+                    <Button
+                        android:id="@+id/btn_up"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="▲"
+                        style="@style/RemoteButton"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <!-- LEFT -->
+                    <Button
+                        android:id="@+id/btn_left"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="◀"
+                        style="@style/RemoteButton"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <!-- OK -->
+                    <Button
+                        android:id="@+id/btn_ok"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:text="OK"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:backgroundTint="@color/accent_blue"
+                        android:textColor="@android:color/white"
+                        style="@style/RemoteButton"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <!-- RIGHT -->
+                    <Button
+                        android:id="@+id/btn_right"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="▶"
+                        style="@style/RemoteButton"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <!-- DOWN -->
+                    <Button
+                        android:id="@+id/btn_down"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:text="▼"
+                        style="@style/RemoteButton"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Back / Exit row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <Button
+                        android:id="@+id/btn_back"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        android:text="← BACK"
+                        style="@style/RemoteButton" />
+
+                    <Button
+                        android:id="@+id/btn_exit"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:layout_weight="1"
+                        android:text="EXIT →"
+                        style="@style/RemoteButton" />
+                </LinearLayout>
+
+                <!-- Number pad -->
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="3"
+                    android:rowCount="4"
+                    android:layout_marginBottom="16dp">
+
+                    <Button android:id="@+id/btn_1" android:text="1" style="@style/NumButton" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+                    <Button android:id="@+id/btn_2" android:text="2" style="@style/NumButton" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+                    <Button android:id="@+id/btn_3" android:text="3" style="@style/NumButton" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+                    <Button android:id="@+id/btn_4" android:text="4" style="@style/NumButton" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+                    <Button android:id="@+id/btn_5" android:text="5" style="@style/NumButton" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+                    <Button android:id="@+id/btn_6" android:text="6" style="@style/NumButton" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+                    <Button android:id="@+id/btn_7" android:text="7" style="@style/NumButton" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+                    <Button android:id="@+id/btn_8" android:text="8" style="@style/NumButton" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+                    <Button android:id="@+id/btn_9" android:text="9" style="@style/NumButton" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+                    <Space android:layout_columnWeight="1" android:layout_rowWeight="1" />
+                    <Button android:id="@+id/btn_0" android:text="0" style="@style/NumButton" android:layout_columnWeight="1" android:layout_rowWeight="1" />
+                    <Space android:layout_columnWeight="1" android:layout_rowWeight="1" />
+                </GridLayout>
+
+                <!-- Code display -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardBackgroundColor="#0D1117"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/last_sent_code"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:id="@+id/tv_nec_code"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="NEC: -"
+                            android:textColor="@color/accent_blue"
+                            android:textSize="12sp"
+                            android:fontFamily="monospace" />
+
+                        <TextView
+                            android:id="@+id/tv_pronto_code"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Pronto: -"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="10sp"
+                            android:fontFamily="monospace"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Bottom padding -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="24dp" />
+
     </LinearLayout>
-
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="8dp">
-        <Button android:id="@+id/btnVolDown" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1"
-            android:text="VOL -" android:layout_marginEnd="8dp"/>
-        <Button android:id="@+id/btnChDown" android:layout_width="0dp" android:layout_height="60dp" android:layout_weight="1"
-            android:text="CH -" android:layout_marginStart="8dp"/>
-    </LinearLayout>
-
-    <Button android:id="@+id/btnMute" android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="MUTE" android:layout_marginTop="16dp"/>
-    <Button android:id="@+id/btnSource" android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="SOURCE" android:layout_marginTop="8dp"/>
-    <Button android:id="@+id/btnMenu" android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="MENU" android:layout_marginTop="8dp"/>
-    <Button android:id="@+id/btnOk" android:layout_width="match_parent" android:layout_height="60dp"
-        android:text="OK" android:layout_marginTop="8dp"/>
-
-</LinearLayout>
+</ScrollView>
